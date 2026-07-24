@@ -6,10 +6,10 @@
 
 // ── Database Settings ──────────────────────────────────────────
 // Change these values for your environment
-define('DB_HOST', 'localhost');          // InfinityFree: sql###.infinityfree.com
-define('DB_NAME', 'fce_writing');        // InfinityFree: epiz_XXXXXXXX_fce
-define('DB_USER', 'root');              // InfinityFree: epiz_XXXXXXXX
-define('DB_PASS', '');                  // InfinityFree: your password
+define('DB_HOST', 'sql311.infinityfree.com');  
+define('DB_NAME', 'if0_42133070_writingtrainer');  
+define('DB_USER', 'if0_42133070');    
+define('DB_PASS', 'tpquizmaster'); 
 define('DB_CHARSET', 'utf8mb4');
 
 // ── Database Connection ────────────────────────────────────────
