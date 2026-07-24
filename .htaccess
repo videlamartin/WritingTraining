@@ -1,0 +1,24 @@
+# Deny access to sensitive files
+<FilesMatch "\.(php|sql|md)$">
+    # Allow PHP files to be executed
+</FilesMatch>
+
+# Deny access to config and seed
+<Files "config.php">
+    # Note: PHP files are executed, not served as text
+    # But we protect non-web files below
+</Files>
+
+# Deny access to db directory
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^db/ - [F,L]
+    RewriteRule ^vendor/ - [F,L]
+    RewriteRule ^seed\.php$ - [F,L]
+</IfModule>
+
+# Disable directory listing
+Options -Indexes
+
+# Set charset
+AddDefaultCharset UTF-8

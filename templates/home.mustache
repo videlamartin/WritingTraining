@@ -1,0 +1,105 @@
+<!-- HOME / DASHBOARD -->
+<div class="page-header">
+    <h1 class="page-title">FCE Writing Trainer</h1>
+    <p class="page-subtitle">Plan diario de entrenamiento</p>
+</div>
+
+{{#flash_saved}}
+<div class="flash-message">✅ ¡Sesión guardada exitosamente!</div>
+{{/flash_saved}}
+
+<!-- Week Card -->
+<div class="week-card" style="--accent-color: {{week_color}}">
+    <div class="flex items-center justify-between">
+        <div>
+            <div class="week-title">{{week_emoji}} Semana {{week_number}}</div>
+            <div class="week-subtitle">{{week_type}}</div>
+        </div>
+        <span class="badge badge-{{week_type_raw}}">Activa</span>
+    </div>
+
+    <div class="week-progress">
+        {{#all_weeks}}
+        <a href="index.php?p=set_week&week={{week_number}}"
+           class="week-dot {{#is_current}}active{{/is_current}} {{#is_completed}}completed{{/is_completed}}"
+           title="Semana {{week_number}}: {{type_label}}"></a>
+        {{/all_weeks}}
+    </div>
+
+    <div class="week-selector">
+        {{#all_weeks}}
+        <a href="index.php?p=set_week&week={{week_number}}"
+           class="btn btn-sm {{#is_current}}btn-primary{{/is_current}}{{^is_current}}btn-secondary{{/is_current}}">
+            {{type_emoji}} S{{week_number}}
+        </a>
+        {{/all_weeks}}
+    </div>
+</div>
+
+<!-- Stats -->
+<div class="stats-row">
+    <div class="stat-card">
+        <div class="stat-value">{{total_sessions}}</div>
+        <div class="stat-label">Sesiones</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{avg_copy}}</div>
+        <div class="stat-label">Promedio</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{best_copy}}</div>
+        <div class="stat-label">Mejor</div>
+    </div>
+</div>
+
+<!-- Models for this week -->
+<div class="section-title">📋 Modelos de la semana</div>
+<div class="model-list">
+    {{#models}}
+    <a href="index.php?p=session&model_id={{id}}&day={{next_day}}" class="model-card">
+        <div class="model-emoji">{{emoji}}</div>
+        <div class="model-info">
+            <div class="model-name">{{number}}. {{title}}</div>
+            <div class="model-meta">
+                <span>{{word_count}} palabras</span>
+                <span>·</span>
+                <span class="status-badge status-{{status_class}}">{{status_label}}</span>
+            </div>
+        </div>
+        <div class="model-action">
+            <span class="step-chevron">›</span>
+        </div>
+    </a>
+    {{/models}}
+</div>
+
+<!-- Recent Activity -->
+{{#has_recent}}
+<div class="section-title mt-2">🕐 Actividad reciente</div>
+{{#recent}}
+<div class="session-card">
+    <div class="session-card-header">
+        <div class="session-card-title">{{emoji}} {{title}}</div>
+        <div class="session-card-date">{{session_date}}</div>
+    </div>
+    <div class="session-card-stats">
+        <div class="session-stat">
+            <div class="session-stat-value">{{copy_formatted}}</div>
+            <div class="session-stat-label">Copia</div>
+        </div>
+        <div class="session-stat">
+            <div class="session-stat-value">{{draft_formatted}}</div>
+            <div class="session-stat-label">Borrador</div>
+        </div>
+        <div class="session-stat">
+            <div class="session-stat-value">{{errors}}</div>
+            <div class="session-stat-label">Errores</div>
+        </div>
+        <div class="session-stat">
+            <div class="session-stat-value">{{feeling}}/10</div>
+            <div class="session-stat-label">Sensación</div>
+        </div>
+    </div>
+</div>
+{{/recent}}
+{{/has_recent}}

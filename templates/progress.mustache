@@ -1,0 +1,108 @@
+<!-- PROGRESS -->
+<div class="page-header">
+    <h1 class="page-title">📊 Progreso</h1>
+    <p class="page-subtitle">Tu evolución en el entrenamiento</p>
+</div>
+
+<!-- Global Stats -->
+<div class="stats-row">
+    <div class="stat-card">
+        <div class="stat-value">{{total_sessions}}</div>
+        <div class="stat-label">Sesiones</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{total_models}}</div>
+        <div class="stat-label">Completados</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{avg_copy}}</div>
+        <div class="stat-label">Promedio</div>
+    </div>
+</div>
+
+<div class="grid-2 mb-2">
+    <div class="stat-card">
+        <div class="stat-value">{{best_copy}}</div>
+        <div class="stat-label">Mejor tiempo</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-value">{{avg_feeling}}/10</div>
+        <div class="stat-label">Sensación prom.</div>
+    </div>
+</div>
+
+<!-- Per-type stats -->
+{{#has_type_stats}}
+<div class="section-title mt-2">📈 Por tipo de texto</div>
+<div class="grid-2 mb-2">
+    {{#type_stats}}
+    <div class="card" style="--accent-color: {{color}}">
+        <div class="card-body">
+            <div class="flex items-center gap-1 mb-1">
+                <span>{{emoji}}</span>
+                <strong>{{type_label}}</strong>
+            </div>
+            <div class="text-sm text-secondary">
+                Promedio: <strong>{{avg_copy_fmt}}</strong><br>
+                Mejor: <strong>{{best_copy_fmt}}</strong><br>
+                Sensación: <strong>{{avg_feeling_fmt}}/10</strong><br>
+                Sesiones: <strong>{{sessions}}</strong>
+            </div>
+        </div>
+    </div>
+    {{/type_stats}}
+</div>
+{{/has_type_stats}}
+
+<!-- Session History -->
+<div class="section-title mt-2">🕐 Historial completo</div>
+
+{{^has_sessions}}
+<div class="empty-state">
+    <div class="empty-state-icon">📝</div>
+    <div class="empty-state-text">Aún no hay sesiones registradas.<br>¡Empezá tu primera sesión!</div>
+    <a href="index.php?p=home" class="btn btn-primary">Ir al inicio</a>
+</div>
+{{/has_sessions}}
+
+{{#has_sessions}}
+{{#sessions}}
+<div class="session-card">
+    <div class="session-card-header">
+        <div class="session-card-title">
+            {{emoji}} {{title}}
+        </div>
+        <div class="session-card-date">{{date_formatted}}</div>
+    </div>
+    <div class="session-card-stats">
+        <div class="session-stat">
+            <div class="session-stat-value">D{{day_number}}</div>
+            <div class="session-stat-label">Día</div>
+        </div>
+        <div class="session-stat">
+            <div class="session-stat-value">{{copy_formatted}}</div>
+            <div class="session-stat-label">Copia</div>
+        </div>
+        <div class="session-stat">
+            <div class="session-stat-value">{{draft_formatted}}</div>
+            <div class="session-stat-label">Borrador</div>
+        </div>
+        <div class="session-stat">
+            <div class="session-stat-value">{{feeling}}/10</div>
+            <div class="session-stat-label">Sensación</div>
+        </div>
+    </div>
+</div>
+{{/sessions}}
+{{/has_sessions}}
+
+<!-- Reset -->
+<div class="section-divider"></div>
+<div class="text-center mb-3">
+    <form action="actions.php" method="POST">
+        <input type="hidden" name="action" value="reset_progress">
+        <button type="button" class="btn btn-danger btn-sm" data-confirm="¿Estás seguro de que querés borrar todo tu progreso? Esta acción no se puede deshacer.">
+            🗑️ Reiniciar todo el progreso
+        </button>
+    </form>
+</div>

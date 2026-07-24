@@ -1,0 +1,38 @@
+<!-- MODELS LIST -->
+<div class="page-header">
+    <h1 class="page-title">📚 Modelos</h1>
+    <p class="page-subtitle">25 modelos de writing para practicar</p>
+</div>
+
+<!-- Type Filters -->
+<div class="filter-row">
+    <a href="index.php?p=models" class="filter-btn {{#filter_all}}active{{/filter_all}}">Todos</a>
+    {{#type_filters}}
+    <a href="index.php?p=models&type={{value}}" class="filter-btn {{#is_active}}active{{/is_active}}">
+        {{emoji}} {{label}}
+    </a>
+    {{/type_filters}}
+</div>
+
+<!-- Model Cards -->
+<div class="model-list">
+    {{#models}}
+    <a href="index.php?p=model&id={{id}}" class="model-card">
+        <div class="model-emoji">{{emoji}}</div>
+        <div class="model-info">
+            <div class="model-name">{{number}}. {{title}}</div>
+            <div class="model-meta">
+                <span class="badge badge-{{type}}">{{type_label}}</span>
+                <span>{{word_count}} pal.</span>
+                <span>{{sessions_done}} sesiones</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: {{progress_pct}}%"></div>
+            </div>
+        </div>
+        <div class="model-action">
+            <span class="step-chevron">›</span>
+        </div>
+    </a>
+    {{/models}}
+</div>

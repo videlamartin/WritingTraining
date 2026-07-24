@@ -1,0 +1,54 @@
+<!-- USEFUL LANGUAGE BANK -->
+<div class="page-header">
+    <h1 class="page-title">🔗 Useful Language</h1>
+    <p class="page-subtitle">Banco de expresiones B2 First</p>
+</div>
+
+<!-- Flashcard -->
+<div class="flashcard">
+    <div class="flashcard-label">{{random_cat}}</div>
+    <div class="flashcard-text">{{random_expr}}</div>
+    <div class="flashcard-meta">{{random_types}}</div>
+    <a href="index.php?p=language" class="btn btn-secondary btn-sm mt-2">🔄 Otra frase</a>
+</div>
+
+<p class="text-sm text-muted text-center mb-2">{{total_expr}} expresiones encontradas</p>
+
+<!-- Type Filter -->
+<div class="form-group">
+    <select class="form-select" onchange="window.location.href='index.php?p=language&type='+this.value">
+        <option value="all">Todos los tipos</option>
+        <option value="essay">📝 Essays</option>
+        <option value="email">📧 Emails</option>
+        <option value="article">📰 Articles</option>
+        <option value="review">⭐ Reviews</option>
+        <option value="report">📊 Reports</option>
+    </select>
+</div>
+
+<!-- Category Filters -->
+<div class="filter-row mb-2">
+    <a href="index.php?p=language" class="filter-btn {{#filter_all}}active{{/filter_all}}">Todas</a>
+    {{#cat_filters}}
+    <a href="index.php?p=language&cat={{value}}" class="filter-btn {{#is_active}}active{{/is_active}}">
+        {{label}}
+    </a>
+    {{/cat_filters}}
+</div>
+
+<!-- Grouped Expressions -->
+{{#groups}}
+<div class="expression-group">
+    <div class="expression-group-title">{{category}}</div>
+    <div class="expression-list">
+        {{#items}}
+        <div class="expression-card">
+            <div class="expression-text">{{expression}}</div>
+            <div class="expression-types">
+                <span class="tag tag-sm">{{writing_types}}</span>
+            </div>
+        </div>
+        {{/items}}
+    </div>
+</div>
+{{/groups}}

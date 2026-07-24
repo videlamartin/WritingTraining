@@ -1,0 +1,234 @@
+<!-- TRAINING SESSION -->
+<div class="page-header">
+    <a href="index.php?p=home" class="back-btn">← Volver al inicio</a>
+    <div class="flex items-center gap-1">
+        <span class="badge badge-{{model.type}}">{{model_emoji}} {{model_type}}</span>
+        <span class="day-badge day-badge-{{day_number}}">Día {{day_number}}/3</span>
+    </div>
+    <h1 class="page-title mt-1">{{model_title}}</h1>
+</div>
+
+<!-- Previous sessions reference -->
+{{#has_prev}}
+<div class="prev-sessions">
+    {{#prev_sessions}}
+    <div class="prev-session-card">
+        <div class="prev-session-day">Día {{day_number}}</div>
+        <div class="prev-session-time">{{copy_formatted}}</div>
+    </div>
+    {{/prev_sessions}}
+</div>
+{{/has_prev}}
+
+<!-- Steps -->
+<div class="steps-container">
+
+    <!-- STEP 1: Calentamiento -->
+    <div class="step step-active" data-step="1">
+        <div class="step-header">
+            <div class="step-number">1</div>
+            <div class="step-title">Calentamiento</div>
+            <div class="step-time">5 min</div>
+            <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+            <p class="text-sm text-muted mb-2">Escribí estas expresiones a mano sin parar. No importa la velocidad, solo que la mano entre en ritmo.</p>
+            <div class="warmup-grid">
+                {{#warmup}}
+                <span class="warmup-tag">{{expression}}</span>
+                {{/warmup}}
+            </div>
+            <div class="timer-container" data-timer-mode="countdown" data-timer-seconds="300">
+                <div class="timer-label">Calentamiento</div>
+                <div class="timer-display">05:00</div>
+                <div class="timer-controls">
+                    <button class="timer-btn timer-btn-start">▶ Iniciar</button>
+                    <button class="timer-btn timer-btn-stop" style="display:none">⏸ Pausar</button>
+                    <button class="timer-btn timer-btn-reset">↺ Reset</button>
+                </div>
+                <input type="hidden" class="timer-hidden-input" value="0">
+            </div>
+            <button class="btn btn-primary btn-block step-next-btn">Siguiente paso →</button>
+        </div>
+    </div>
+
+    <!-- STEP 2: Transcripción -->
+    <div class="step" data-step="2">
+        <div class="step-header">
+            <div class="step-number">2</div>
+            <div class="step-title">Transcripción</div>
+            <div class="step-time">20 min</div>
+            <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+            <div class="prompt-box">
+                <strong>📝 Consigna:</strong><br>
+                {{model_prompt}}
+            </div>
+
+            <button class="reveal-btn" data-target="model-text-content">
+                👁️ Mostrar texto del modelo
+            </button>
+
+            <div id="model-text-content" class="content-box content-hidden">
+                {{model_content}}
+            </div>
+
+            <div class="word-count-badge mb-2">📊 {{model_words}} palabras</div>
+
+            <p class="text-sm text-muted mb-1">Copiá TODO el writing. No borres. No vuelvas atrás.</p>
+
+            <div class="timer-container" data-timer-mode="stopwatch" data-timer-seconds="0">
+                <div class="timer-label">Cronómetro de copia</div>
+                <div class="timer-display">00:00</div>
+                <div class="timer-controls">
+                    <button class="timer-btn timer-btn-start">▶ Iniciar</button>
+                    <button class="timer-btn timer-btn-stop" style="display:none">⏸ Pausar</button>
+                    <button class="timer-btn timer-btn-reset">↺ Reset</button>
+                </div>
+                <input type="hidden" class="timer-hidden-input" id="timer-copy-value" value="0">
+            </div>
+            <button class="btn btn-primary btn-block step-next-btn">Siguiente paso →</button>
+        </div>
+    </div>
+
+    <!-- STEP 3: Useful Language -->
+    <div class="step" data-step="3">
+        <div class="step-header">
+            <div class="step-number">3</div>
+            <div class="step-title">Useful Language</div>
+            <div class="step-time">10 min</div>
+            <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+            <p class="text-sm text-muted mb-2">Escribí a mano TODAS las expresiones. Después elegí las 5 mejores (máximo 5 checkboxes) y escribilas 3 veces cada una.</p>
+
+            {{#useful_lang}}
+            <div class="ul-section">
+                <div class="ul-category">{{category}}</div>
+                <ul class="ul-list">
+                    {{#expressions}}
+                    <li class="ul-item">
+                        <input type="checkbox" class="ul-checkbox">
+                        <span>{{text}}</span>
+                    </li>
+                    {{/expressions}}
+                </ul>
+            </div>
+            {{/useful_lang}}
+
+            <div class="timer-container" data-timer-mode="countdown" data-timer-seconds="600">
+                <div class="timer-label">Useful Language</div>
+                <div class="timer-display">10:00</div>
+                <div class="timer-controls">
+                    <button class="timer-btn timer-btn-start">▶ Iniciar</button>
+                    <button class="timer-btn timer-btn-stop" style="display:none">⏸ Pausar</button>
+                    <button class="timer-btn timer-btn-reset">↺ Reset</button>
+                </div>
+                <input type="hidden" class="timer-hidden-input" value="0">
+            </div>
+            <button class="btn btn-primary btn-block step-next-btn">Siguiente paso →</button>
+        </div>
+    </div>
+
+    <!-- STEP 4: Borrador Rápido -->
+    <div class="step" data-step="4">
+        <div class="step-header">
+            <div class="step-number">4</div>
+            <div class="step-title">Borrador Rápido</div>
+            <div class="step-time">5 min</div>
+            <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+            <div class="prompt-box">
+                <strong>📝 Consigna:</strong><br>
+                {{model_prompt}}
+            </div>
+
+            <p class="text-sm text-muted mb-2">Escribí SOLO el esquema en tu hoja. Máximo 5 minutos. Ejemplo:<br>
+            <em>Intro → Punto 1 → Punto 2 → Idea propia → Conclusión</em></p>
+
+            <div class="timer-container" data-timer-mode="countdown" data-timer-seconds="300">
+                <div class="timer-label">Borrador rápido</div>
+                <div class="timer-display">05:00</div>
+                <div class="timer-controls">
+                    <button class="timer-btn timer-btn-start">▶ Iniciar</button>
+                    <button class="timer-btn timer-btn-stop" style="display:none">⏸ Pausar</button>
+                    <button class="timer-btn timer-btn-reset">↺ Reset</button>
+                </div>
+                <input type="hidden" class="timer-hidden-input" id="timer-draft-value" value="0">
+            </div>
+            <button class="btn btn-primary btn-block step-next-btn">Siguiente paso →</button>
+        </div>
+    </div>
+
+    <!-- STEP 5: Reflexión + Guardar -->
+    <div class="step" data-step="5">
+        <div class="step-header">
+            <div class="step-number">5</div>
+            <div class="step-title">Reflexión + Guardar</div>
+            <div class="step-time">5 min</div>
+            <div class="step-chevron">›</div>
+        </div>
+        <div class="step-body">
+            <form action="actions.php" method="POST" id="session-form">
+                <input type="hidden" name="action" value="save_session">
+                <input type="hidden" name="model_id" value="{{model_id}}">
+                <input type="hidden" name="day_number" value="{{day_number}}">
+                <input type="hidden" name="copy_time_seconds" value="0">
+                <input type="hidden" name="draft_time_seconds" value="0">
+
+                <div class="form-group">
+                    <label class="form-label">¿Dónde perdiste más tiempo?</label>
+                    <textarea name="reflection" class="form-textarea" rows="2" placeholder="Ej: en los conectores, en la intro..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">¿Qué frase te costó escribir?</label>
+                    <input type="text" name="favorite_phrase" class="form-input" placeholder="Ej: Having considered both sides...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">¿Qué conector querés recordar mañana?</label>
+                    <input type="text" name="new_connectors" class="form-input" placeholder="Ej: Nevertheless, What is more...">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Errores detectados</label>
+                    <input type="number" name="errors" class="form-input" min="0" max="50" value="0" style="width: 100px">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">¿Cómo te sentiste? (1-10)</label>
+                    <div class="feeling-scale">
+                        <div class="feeling-option">
+                            <input type="radio" name="feeling" value="2" id="feel-2">
+                            <label for="feel-2">😫<span>2</span></label>
+                        </div>
+                        <div class="feeling-option">
+                            <input type="radio" name="feeling" value="4" id="feel-4">
+                            <label for="feel-4">😕<span>4</span></label>
+                        </div>
+                        <div class="feeling-option">
+                            <input type="radio" name="feeling" value="6" id="feel-6">
+                            <label for="feel-6">😐<span>6</span></label>
+                        </div>
+                        <div class="feeling-option">
+                            <input type="radio" name="feeling" value="8" id="feel-8">
+                            <label for="feel-8">🙂<span>8</span></label>
+                        </div>
+                        <div class="feeling-option">
+                            <input type="radio" name="feeling" value="10" id="feel-10" checked>
+                            <label for="feel-10">🤩<span>10</span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    💾 Guardar sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>
