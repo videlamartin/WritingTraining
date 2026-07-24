@@ -6,10 +6,10 @@
 
 // ── Database Settings ──────────────────────────────────────────
 // Change these values for your environment
-define('DB_HOST', 'sql311.infinityfree.com');  
+define('DB_HOST', 'sql210.infinityfree.com');  
 define('DB_NAME', 'if0_42133070_writingtrainer');  
-define('DB_USER', 'if0_42133070');    
-define('DB_PASS', 'tpquizmaster'); 
+define('DB_USER', 'if0_42491134');    
+define('DB_PASS', 'writingtrainer'); 
 define('DB_CHARSET', 'utf8mb4');
 
 // ── Database Connection ────────────────────────────────────────
