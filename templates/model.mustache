@@ -58,6 +58,16 @@
             <div class="session-stat-label">Sensación</div>
         </div>
     </div>
+    {{#reflection}}
+    <div class="mt-1 text-sm text-secondary" style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 6px;">
+        <strong>Reflexión:</strong> {{reflection}}
+    </div>
+    {{/reflection}}
+    {{#new_connectors}}
+    <div class="mt-1 text-sm text-secondary" style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 6px;">
+        <strong>Conectores:</strong> <span style="color: #a78bfa;">{{new_connectors}}</span>
+    </div>
+    {{/new_connectors}}
 </div>
 {{/sessions}}
 {{/has_sessions}}

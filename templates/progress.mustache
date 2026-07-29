@@ -36,7 +36,7 @@
 <div class="section-title mt-2">📈 Por tipo de texto</div>
 <div class="grid-2 mb-2">
     {{#type_stats}}
-    <div class="card" style="--accent-color: {{color}}">
+    <div class="card card-accent" style="--accent-color: {{color}}">
         <div class="card-body">
             <div class="flex items-center gap-1 mb-1">
                 <span>{{emoji}}</span>
@@ -92,6 +92,16 @@
             <div class="session-stat-label">Sensación</div>
         </div>
     </div>
+    {{#reflection}}
+    <div class="mt-1 text-sm text-secondary" style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 6px;">
+        <strong>Reflexión:</strong> {{reflection}}
+    </div>
+    {{/reflection}}
+    {{#new_connectors}}
+    <div class="mt-1 text-sm text-secondary" style="background: rgba(255,255,255,0.02); padding: 8px; border-radius: 6px;">
+        <strong>Conectores:</strong> <span style="color: #a78bfa;">{{new_connectors}}</span>
+    </div>
+    {{/new_connectors}}
 </div>
 {{/sessions}}
 {{/has_sessions}}

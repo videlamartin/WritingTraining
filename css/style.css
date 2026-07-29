@@ -132,6 +132,10 @@ img { max-width: 100%; }
     transition: all 0.25s ease;
 }
 
+.card-accent {
+    border-left: 3px solid var(--accent-color, var(--color-essay));
+}
+
 .card-header {
     padding: 14px 16px 10px;
     border-bottom: 1px solid var(--border-glass);
