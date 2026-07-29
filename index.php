@@ -67,6 +67,7 @@ switch ($page) {
             $r['emoji'] = getTypeEmoji($r['type']);
             $r['copy_formatted'] = formatTime($r['copy_time_seconds']);
             $r['draft_formatted'] = formatTime($r['draft_time_seconds']);
+            $r['date_formatted'] = date('d/m', strtotime($r['session_date']));
         }
         unset($r);
 
@@ -257,26 +258,32 @@ switch ($page) {
         );
         $sessions->execute([$modelId]);
         $sessions = $sessions->fetchAll();
+        $maxDay = 0;
         foreach ($sessions as &$s) {
             $s['copy_formatted'] = formatTime($s['copy_time_seconds']);
             $s['draft_formatted'] = formatTime($s['draft_time_seconds']);
             $s['date_formatted'] = date('d/m/Y', strtotime($s['session_date']));
+            if ($s['day_number'] > $maxDay) $maxDay = $s['day_number'];
         }
         unset($s);
+        $nextDay = min($maxDay + 1, 3);
 
         render($mustache, 'model', [
-            'page_title'    => $model['title'] . ' — FCE Writing Trainer',
-            'model'         => $model,
-            'model_title'   => $model['title'],
-            'model_type'    => ucfirst($model['type']),
-            'model_emoji'   => getTypeEmoji($model['type']),
-            'model_color'   => getTypeColor($model['type']),
-            'model_prompt'  => $model['prompt'],
-            'model_content' => $model['content'],
-            'model_words'   => $model['word_count'],
-            'useful_lang'   => $ulFormatted,
-            'sessions'      => $sessions,
-            'has_sessions'  => count($sessions) > 0,
+            'page_title'      => $model['title'] . ' — FCE Writing Trainer',
+            'model'           => $model,
+            'model_id'        => $model['id'],
+            'model_title'     => $model['title'],
+            'model_type'      => ucfirst($model['type']),
+            'model_type_raw'  => $model['type'],
+            'model_emoji'     => getTypeEmoji($model['type']),
+            'model_color'     => getTypeColor($model['type']),
+            'model_prompt'    => $model['prompt'],
+            'model_content'   => $model['content'],
+            'model_words'     => $model['word_count'],
+            'useful_lang'     => $ulFormatted,
+            'sessions'        => $sessions,
+            'has_sessions'    => count($sessions) > 0,
+            'next_day'        => $nextDay,
         ]);
         break;
 

@@ -1,24 +1,21 @@
 <!-- MODEL DETAIL -->
 <div class="page-header">
-    <a href="index.php?p=models" class="back-btn">← Volver a modelos</a>
+    <a href="index.php?p=models" class="back-btn">← Modelos</a>
     <div class="flex items-center gap-1 mb-1">
-        <span class="badge badge-{{model.type}}">{{model_emoji}} {{model_type}}</span>
+        <span class="badge badge-{{model_type_raw}}">{{model_emoji}} {{model_type}}</span>
         <span class="word-count-badge">{{model_words}} palabras</span>
     </div>
     <h1 class="page-title">{{model_title}}</h1>
 </div>
 
-<!-- Prompt -->
 <div class="prompt-box">
     <strong>📝 Consigna:</strong><br>
     {{model_prompt}}
 </div>
 
-<!-- Model content -->
 <div class="section-title">📄 Modelo completo</div>
 <div class="content-box">{{model_content}}</div>
 
-<!-- Useful Language -->
 <div class="section-title mt-2">🔗 Useful Language</div>
 <div class="card mb-2">
     <div class="card-body">
@@ -27,9 +24,7 @@
             <div class="ul-category">{{category}}</div>
             <ul class="ul-list">
                 {{#expressions}}
-                <li class="ul-item">
-                    <span>{{text}}</span>
-                </li>
+                <li class="ul-item"><span>{{text}}</span></li>
                 {{/expressions}}
             </ul>
         </div>
@@ -37,9 +32,8 @@
     </div>
 </div>
 
-<!-- Session History -->
 {{#has_sessions}}
-<div class="section-title mt-2">📊 Historial de sesiones</div>
+<div class="section-title mt-2">📊 Historial</div>
 {{#sessions}}
 <div class="session-card">
     <div class="session-card-header">
@@ -68,9 +62,8 @@
 {{/sessions}}
 {{/has_sessions}}
 
-<!-- Start Session Button -->
-<div class="mt-2">
-    <a href="index.php?p=session&model_id={{model.id}}&day=1" class="btn btn-primary btn-block">
+<div class="mt-2 mb-2">
+    <a href="index.php?p=session&model_id={{model_id}}&day={{next_day}}" class="btn btn-primary btn-block">
         ✍️ Iniciar sesión
     </a>
 </div>

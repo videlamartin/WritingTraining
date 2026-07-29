@@ -5,7 +5,7 @@
 </div>
 
 {{#flash_saved}}
-<div class="flash-message">✅ ¡Sesión guardada exitosamente!</div>
+<div class="flash-message">✅ ¡Sesión guardada!</div>
 {{/flash_saved}}
 
 <!-- Week Card -->
@@ -21,8 +21,7 @@
     <div class="week-progress">
         {{#all_weeks}}
         <a href="index.php?p=set_week&week={{week_number}}"
-           class="week-dot {{#is_current}}active{{/is_current}} {{#is_completed}}completed{{/is_completed}}"
-           title="Semana {{week_number}}: {{type_label}}"></a>
+           class="week-dot {{#is_current}}active{{/is_current}} {{#is_completed}}completed{{/is_completed}}"></a>
         {{/all_weeks}}
     </div>
 
@@ -59,28 +58,25 @@
     <a href="index.php?p=session&model_id={{id}}&day={{next_day}}" class="model-card">
         <div class="model-emoji">{{emoji}}</div>
         <div class="model-info">
-            <div class="model-name">{{number}}. {{title}}</div>
+            <div class="model-name">{{title}}</div>
             <div class="model-meta">
-                <span>{{word_count}} palabras</span>
-                <span>·</span>
+                <span>{{word_count}} pal.</span>
                 <span class="status-badge status-{{status_class}}">{{status_label}}</span>
             </div>
         </div>
-        <div class="model-action">
-            <span class="step-chevron">›</span>
-        </div>
+        <div class="model-action">›</div>
     </a>
     {{/models}}
 </div>
 
 <!-- Recent Activity -->
 {{#has_recent}}
-<div class="section-title mt-2">🕐 Actividad reciente</div>
+<div class="section-title mt-2">🕐 Reciente</div>
 {{#recent}}
 <div class="session-card">
     <div class="session-card-header">
         <div class="session-card-title">{{emoji}} {{title}}</div>
-        <div class="session-card-date">{{session_date}}</div>
+        <div class="session-card-date">{{date_formatted}}</div>
     </div>
     <div class="session-card-stats">
         <div class="session-stat">

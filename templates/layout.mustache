@@ -2,13 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a0a14">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>{{page_title}}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="{{current_page}}">
     <main class="app-container">
         {{{content}}}
     </main>
@@ -22,17 +26,13 @@
             <span class="nav-icon">📚</span>
             <span class="nav-label">Modelos</span>
         </a>
-        <a href="index.php?p=session" class="nav-item {{#is_session}}active{{/is_session}}" id="nav-session">
-            <span class="nav-icon">✍️</span>
-            <span class="nav-label">Sesión</span>
+        <a href="index.php?p=language" class="nav-item {{#is_language}}active{{/is_language}}">
+            <span class="nav-icon">🔗</span>
+            <span class="nav-label">Frases</span>
         </a>
         <a href="index.php?p=progress" class="nav-item {{#is_progress}}active{{/is_progress}}">
             <span class="nav-icon">📊</span>
             <span class="nav-label">Progreso</span>
-        </a>
-        <a href="index.php?p=language" class="nav-item {{#is_language}}active{{/is_language}}">
-            <span class="nav-icon">🔗</span>
-            <span class="nav-label">Frases</span>
         </a>
     </nav>
     
