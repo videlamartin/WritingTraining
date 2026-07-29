@@ -442,6 +442,25 @@ switch ($page) {
         header('Location: index.php?p=home');
         exit;
 
+    // ── Setup (Seed Database) ──────────────────────────────────
+    case 'setup':
+        try {
+            // Capture the output of seed.php
+            ob_start();
+            require_once __DIR__ . '/seed.php';
+            $output = ob_get_clean();
+            
+            echo "<h1>Configuración Completada</h1>";
+            echo "<p>La base de datos ha sido inicializada con éxito.</p>";
+            echo "<pre style='background: #111; color: #0f0; padding: 20px; border-radius: 8px; overflow-x: auto;'>" . htmlspecialchars($output) . "</pre>";
+            echo "<br><a href='index.php' style='display: inline-block; padding: 10px 20px; background: #7c3aed; color: white; text-decoration: none; border-radius: 5px; font-family: sans-serif;'>Ir a la aplicación</a>";
+        } catch (Exception $e) {
+            echo "<h1>Error en la Configuración</h1>";
+            echo "<p>Ocurrió un error al inicializar la base de datos:</p>";
+            echo "<pre style='background: #311; color: #f55; padding: 20px; border-radius: 8px;'>" . htmlspecialchars($e->getMessage()) . "</pre>";
+        }
+        exit;
+
     // ── Default ────────────────────────────────────────────────
     default:
         header('Location: index.php?p=home');
