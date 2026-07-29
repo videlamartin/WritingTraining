@@ -25,18 +25,20 @@ try {
 }
 
 // ── Mustache Engine ────────────────────────────────────────────
-require_once __DIR__ . '/vendor/Mustache/Engine.php';
 
-// Register autoloader for Mustache classes
+// PSR-4 autoloader for Mustache\ namespace (v2+)
 spl_autoload_register(function ($class) {
-    // Convert Mustache_Loader_FilesystemLoader → vendor/Mustache/Loader/FilesystemLoader.php
-    if (strpos($class, 'Mustache_') === 0) {
-        $path = __DIR__ . '/vendor/' . str_replace('_', '/', $class) . '.php';
+    // Handle namespaced classes: Mustache\Loader\FilesystemLoader → vendor/Mustache/Loader/FilesystemLoader.php
+    if (strpos($class, 'Mustache\\') === 0) {
+        $path = __DIR__ . '/vendor/' . str_replace('\\', '/', $class) . '.php';
         if (file_exists($path)) {
             require_once $path;
         }
     }
 });
+
+// Backward compatibility: creates Mustache_Engine, Mustache_Loader_FilesystemLoader, etc.
+require_once __DIR__ . '/vendor/Mustache/compat.php';
 
 $mustache = new Mustache_Engine([
     'loader' => new Mustache_Loader_FilesystemLoader(__DIR__ . '/templates', [
