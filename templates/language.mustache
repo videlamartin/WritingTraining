@@ -9,14 +9,14 @@
     <div class="flashcard-label">{{random_cat}}</div>
     <div class="flashcard-text">{{random_expr}}</div>
     <div class="flashcard-meta">{{random_types}}</div>
-    <a href="index.php?p=language" class="btn btn-secondary btn-sm mt-2">🔄 Otra frase</a>
+    <a href="index.php?p=language&cat={{filter_cat_raw}}&type={{type_filter}}" class="btn btn-secondary btn-sm mt-2">🔄 Otra frase</a>
 </div>
 
 <p class="text-sm text-muted text-center mb-2">{{total_expr}} expresiones encontradas</p>
 
 <!-- Type Filter -->
 <div class="form-group">
-    <select class="form-select" onchange="window.location.href='index.php?p=language&type='+this.value">
+    <select class="form-select type-filter-select" onchange="window.location.href='index.php?p=language&cat={{filter_cat_raw}}&type='+this.value">
         <option value="all">Todos los tipos</option>
         <option value="essay">📝 Essays</option>
         <option value="email">📧 Emails</option>
@@ -25,12 +25,18 @@
         <option value="report">📊 Reports</option>
     </select>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var sel = document.querySelector('.type-filter-select');
+        if (sel) sel.value = '{{type_filter}}';
+    });
+</script>
 
 <!-- Category Filters -->
 <div class="filter-row mb-2">
-    <a href="index.php?p=language" class="filter-btn {{#filter_all}}active{{/filter_all}}">Todas</a>
+    <a href="index.php?p=language&type={{type_filter}}" class="filter-btn {{#filter_all}}active{{/filter_all}}">Todas</a>
     {{#cat_filters}}
-    <a href="index.php?p=language&cat={{value}}" class="filter-btn {{#is_active}}active{{/is_active}}">
+    <a href="index.php?p=language&cat={{value}}&type={{type_filter}}" class="filter-btn {{#is_active}}active{{/is_active}}">
         {{label}}
     </a>
     {{/cat_filters}}

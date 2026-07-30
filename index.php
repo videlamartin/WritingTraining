@@ -414,20 +414,29 @@ switch ($page) {
         $grouped = array_values($grouped);
 
         // Random expression for flashcard
-        $random = $pdo->query(
-            "SELECT * FROM useful_expressions ORDER BY RAND() LIMIT 1"
-        )->fetch();
+        $randSql = "SELECT * FROM useful_expressions WHERE 1=1";
+        if ($filterCat !== 'all') {
+            $randSql .= " AND category = ?";
+        }
+        if ($filterType !== 'all') {
+            $randSql .= " AND writing_types LIKE ?";
+        }
+        $randSql .= " ORDER BY RAND() LIMIT 1";
+        $stmtRand = $pdo->prepare($randSql);
+        $stmtRand->execute($params);
+        $random = $stmtRand->fetch();
 
         render($mustache, 'language', [
-            'page_title'    => 'Useful Language — FCE Writing Trainer',
-            'groups'        => $grouped,
-            'cat_filters'   => $catFilters,
-            'filter_all'    => ($filterCat === 'all'),
-            'type_filter'   => $filterType,
-            'random_expr'   => $random ? $random['expression'] : '',
-            'random_cat'    => $random ? ucfirst(str_replace('_', ' ', $random['category'])) : '',
-            'random_types'  => $random ? $random['writing_types'] : '',
-            'total_expr'    => count($expressions),
+            'page_title'      => 'Useful Language — FCE Writing Trainer',
+            'groups'          => $grouped,
+            'cat_filters'     => $catFilters,
+            'filter_all'      => ($filterCat === 'all'),
+            'filter_cat_raw'  => $filterCat,
+            'type_filter'     => $filterType,
+            'random_expr'     => $random ? $random['expression'] : '',
+            'random_cat'      => $random ? ucfirst(str_replace('_', ' ', $random['category'])) : '',
+            'random_types'    => $random ? $random['writing_types'] : '',
+            'total_expr'      => count($expressions),
         ]);
         break;
 
